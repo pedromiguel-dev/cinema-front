@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import Login from "./pages/login/Login";
 import RequireAuth from "./pages/login/RequireAuth";
 import WellCome from "./pages/WellCome";
+import Register from "./pages/register";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route path="/*" element={<Layout />}>
         {/**public */}
         <Route path="Login" element={<Login />} />
+        <Route path="Register" element={<Register />} />
         <Route path="" element={<WellCome />} />
         {/** protected */}
         <Route element={<RequireAuth allowedRoles={[30, 200]} />}>

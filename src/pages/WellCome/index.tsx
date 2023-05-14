@@ -5,6 +5,7 @@ const WellCome = () => {
     <main>
       <Link to={"Home"}>Home</Link>
       <Link to={"Login"}>Login</Link>
+      <Link to={"Register"}>Register</Link>
     </main>
   );
 };

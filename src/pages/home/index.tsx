@@ -1,13 +1,16 @@
 // import React from "react";
 
-function Login() {
+import { Link } from "react-router-dom";
+
+function Home() {
   return (
     <>
       <section>
         <h1>Home page</h1>
+        <Link to={"/Users"}>see users</Link>
       </section>
     </>
   );
 }
 
-export default Login;
+export default Home;

@@ -34,7 +34,7 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      console.log(response.data[0]);
+
       const accessToken = response.data[0].accessToken;
       const roles = response.data[0].roles;
 

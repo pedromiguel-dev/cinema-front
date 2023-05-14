@@ -5,6 +5,7 @@ import Login from "./pages/login/Login";
 import RequireAuth from "./pages/login/RequireAuth";
 import WellCome from "./pages/WellCome";
 import Register from "./pages/register";
+import Users from "./pages/users";
 
 function App() {
   return (
@@ -15,8 +16,11 @@ function App() {
         <Route path="Register" element={<Register />} />
         <Route path="" element={<WellCome />} />
         {/** protected */}
-        <Route element={<RequireAuth allowedRoles={[30, 200]} />}>
+        <Route element={<RequireAuth allowedRoles={[100, 200]} />}>
           <Route path="Home" element={<Home />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={[100, 30, 200]} />}>
+          <Route path="Users" element={<Users />} />
         </Route>
       </Route>
     </Routes>

@@ -11,7 +11,6 @@ const RequireAuth = ({ allowedRoles }: props) => {
 
   if (auth?.user) {
     const role = auth?.user.roles.find((role) => {
-      console.log(role);
       return allowedRoles.includes(role.id);
     });
 

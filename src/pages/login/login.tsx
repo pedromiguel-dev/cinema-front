@@ -3,13 +3,14 @@ import axios from "../../api/axios";
 import { AxiosError } from "axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
+import "./index.css";
 const LOGIN_URL = "/api/v1/auth";
 
 function Login() {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/home";
 
   const emailRef = React.useRef<HTMLInputElement>(null);
   const errRef = React.useRef<HTMLParagraphElement>(null);
@@ -55,11 +56,11 @@ function Login() {
 
   return (
     <>
-      <section>
-        <p ref={errRef} className={err ? "errMsg" : "offscreen"} aria-live="assertive">
+      <section id="login_section">
+        <p ref={errRef} className={err ? "error" : "offscreen"} aria-live="assertive">
           {err}
         </p>
-        <h1>Sign in</h1>
+        <h1>SISTEMA DE CINEMA</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email">Email</label>

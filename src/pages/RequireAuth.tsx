@@ -1,6 +1,6 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import Unauthorized from "../unauthorized";
+import useAuth from "../hooks/useAuth";
+import Unauthorized from "./unauthorized";
 
 interface props {
   allowedRoles: number[];
@@ -16,7 +16,7 @@ const RequireAuth = ({ allowedRoles }: props) => {
 
     return role ? <Outlet /> : <Unauthorized />;
   }
-  return <Navigate to="/login" state={{ from: location }} replace />;
+  return <Navigate to="/" state={{ from: location }} replace />;
 };
 
 export default RequireAuth;

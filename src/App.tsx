@@ -2,8 +2,7 @@ import Layout from "./layout";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Login from "./pages/login/Login";
-import RequireAuth from "./pages/login/RequireAuth";
-import WellCome from "./pages/WellCome";
+import RequireAuth from "./pages/RequireAuth";
 import Register from "./pages/register";
 import Users from "./pages/users";
 
@@ -12,11 +11,12 @@ function App() {
     <Routes>
       <Route path="/*" element={<Layout />}>
         {/**public */}
-        <Route path="Login" element={<Login />} />
-        <Route path="Register" element={<Register />} />
-        <Route path="" element={<WellCome />} />
+        <Route path="" element={<Login />} />
         {/** protected */}
-        <Route element={<RequireAuth allowedRoles={[100, 200]} />}>
+        <Route element={<RequireAuth allowedRoles={[30]} />}>
+          <Route path="Register" element={<Register />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={[100, 200, 30]} />}>
           <Route path="Home" element={<Home />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={[100, 30, 200]} />}>

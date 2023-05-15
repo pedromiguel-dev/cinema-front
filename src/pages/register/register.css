@@ -1,0 +1,15 @@
+.offscreen {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+
+}
+
+.instructions {
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
+}

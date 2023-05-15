@@ -1,97 +1,74 @@
-import React from "react";
-import AuthContext from "../../context/AuthProvider";
+import React, { FormEvent } from "react";
 import axios from "../../api/axios";
+import { AxiosError } from "axios";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./index.css";
 const LOGIN_URL = "/api/v1/auth";
 
 function Login() {
-  const { setAuth } = React.useContext(AuthContext);
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/home";
 
-  const userRef = React.useRef();
-  const errRef = React.useRef();
+  const emailRef = React.useRef<HTMLInputElement>(null);
+  const errRef = React.useRef<HTMLParagraphElement>(null);
 
-  const [user, setUser] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [err, setErr] = React.useState("");
-  // const [sueccess, setSuccess] = React.useState<boolean>();
 
   React.useEffect(() => {
-    userRef.current.focus();
+    if (emailRef.current) emailRef.current.focus();
   }, []);
 
   React.useEffect(() => {
     setErr("");
-  }, [user, password]);
+  }, [email, password]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(LOGIN_URL, JSON.stringify({ name: user, email, password }), {
+      const response = await axios.post(LOGIN_URL, JSON.stringify({ email, password }), {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      console.log(response.data);
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setAuth({ user, emial, password, roles, accessToken });
 
-      console.log(user, email, password);
+      const accessToken = response.data[0].accessToken;
+      const roles = response.data[0].roles;
+
+      setAuth?.({ user: { email, password, roles, accessToken } });
+
+      console.log(email, password, accessToken, roles);
       setEmail("");
-      setUser("");
       setPassword("");
-    } catch (e) {
-      if (!e?.response) {
-        setErr("No server response");
-      } else if (err.response?.status == 400) {
-        setErr("Missing credentials");
-      } else if (err.response?.status == 401) {
-        setErr("Unauthorized");
-      } else {
-        setErr("Login failed");
+      navigate(from, { replace: true });
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
+        setErr(e.response?.data.error);
       }
-      errRef.current.focus();
+      if (errRef.current) errRef.current.focus();
       console.log(e);
     }
-
-    // setSuccess(true);
   };
 
   return (
     <>
-      <section>
-        <p ref={errRef} className={err ? "errMsg" : "offscreen"} aria-live="assertive">
+      <section id="login_section">
+        <p ref={errRef} className={err ? "error" : "offscreen"} aria-live="assertive">
           {err}
         </p>
-        <h1>Sign in</h1>
+        <h1>SISTEMA DE CINEMA</h1>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              ref={userRef}
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-            />
-          </div>
-          <div>
             <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} required />
+            <input type="email" name="email" id="email" ref={emailRef} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
             <label htmlFor="password">Senha</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-            />
+            <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} />
           </div>
           <button type="submit">Sign in</button>
         </form>

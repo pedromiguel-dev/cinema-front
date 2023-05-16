@@ -7,26 +7,22 @@ interface role {
 }
 
 export interface user {
-  id?: string;
-  name?: string;
-  email: string;
   accessToken: string;
-  password: string;
   roles: role[];
 }
 
 interface d {
-  user: user;
+  user: user | undefined;
 }
 
 interface UserContextData {
-  auth?: Partial<d>;
-  setAuth?: (value: React.SetStateAction<Partial<d> | undefined>) => void;
+  auth?: d;
+  setAuth?: (value: React.SetStateAction<d | undefined>) => void;
 }
 const AuthContext = createContext<UserContextData>({});
 
 export const AuthProvider = ({ children }: React.PropsWithChildren) => {
-  const [auth, setAuth] = React.useState<Partial<d>>();
+  const [auth, setAuth] = React.useState<d>();
 
   return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
 };

@@ -39,7 +39,7 @@ function Login() {
       const accessToken = response.data[0].accessToken;
       const roles = response.data[0].roles;
 
-      setAuth?.({ user: { email, password, roles, accessToken } });
+      setAuth?.({ user: { roles, accessToken } });
 
       console.log(email, password, accessToken, roles);
       setEmail("");

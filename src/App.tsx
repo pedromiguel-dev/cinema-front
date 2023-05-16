@@ -5,6 +5,8 @@ import Login from "./pages/login/Login";
 import RequireAuth from "./pages/RequireAuth";
 import Register from "./pages/register";
 import Users from "./pages/users";
+import PersistLogin from "./pages/login/persistLogin";
+import NavSidebar from "./components/navsidebar";
 
 function App() {
   return (
@@ -13,14 +15,18 @@ function App() {
         {/**public */}
         <Route path="" element={<Login />} />
         {/** protected */}
-        <Route element={<RequireAuth allowedRoles={[30]} />}>
-          <Route path="Register" element={<Register />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={[100, 200, 30]} />}>
-          <Route path="Home" element={<Home />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={[100, 30, 200]} />}>
-          <Route path="Users" element={<Users />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<NavSidebar />}>
+            <Route element={<RequireAuth allowedRoles={[30]} />}>
+              <Route path="Register" element={<Register />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={[100, 200, 30]} />}>
+              <Route path="Home" element={<Home />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={[100, 30, 200]} />}>
+              <Route path="Users" element={<Users />} />
+            </Route>
+          </Route>
         </Route>
       </Route>
     </Routes>

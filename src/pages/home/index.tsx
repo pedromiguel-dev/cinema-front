@@ -3,12 +3,15 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import React from "react";
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 function Home() {
   const [_, setResult] = React.useState<any>();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const refresh = useRefreshToken();
 
   const runEffectOnce = React.useRef(false);
 
@@ -47,6 +50,7 @@ function Home() {
       <section>
         <h1>Home page</h1>
         {/* <Link to={"/Users"}>see users</Link> */}
+        <button onClick={() => refresh()}>refresh</button>
       </section>
     </>
   );

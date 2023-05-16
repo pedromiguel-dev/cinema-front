@@ -6,12 +6,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, NavDropdown, Offcanvas, Button, Row, Col } from "react-bootstrap";
 import useLogout from "../../hooks/useLogout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDoorOpen, faFilm, faVideo } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRightFromBracket,
+  faDoorOpen,
+  faFilm,
+  faGears,
+  faSquareCaretRight,
+  faUser,
+  faVideo,
+} from "@fortawesome/free-solid-svg-icons";
 
 const SideBarButtons = () => {
   return (
-    <Container fluid>
-      <Row className={"gap-4 sidebar-linha"}>
+    <Container fluid id="menu-container">
+      <Row className={"gap-4 sidebar-linha active"}>
         <Col>
           <FontAwesomeIcon icon={faFilm} />
         </Col>
@@ -40,19 +48,32 @@ const NavSidebar = () => {
   const logout = useLogout();
   return (
     <div id="navsidebar">
-      <Navbar id="main-navbar" expand="md" variant="light" bg="light">
+      <Navbar id="main-navbar" expand="md">
         <Container>
-          <Navbar.Brand href="/home">Área de gerenciamento</Navbar.Brand>
+          <Navbar.Brand href="/home">
+            <h5 className="m-0">
+              <b>Cinema</b>
+            </h5>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto"></Nav>
             <Nav>
-              <Nav.Link href="/home">Config</Nav.Link>
-              <NavDropdown title="Usuário" id="basic-nav-dropdown" align={"end"}>
-                <NavDropdown.Item href="/home">Perfil</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => logout()}>Sair</NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Item className="mx-1">
+                <Button variant="light">
+                  <FontAwesomeIcon icon={faGears} />
+                </Button>
+              </Nav.Item>
+              <Nav.Item className="mx-1">
+                <Button variant="light">
+                  <FontAwesomeIcon icon={faUser} />
+                </Button>
+              </Nav.Item>
+              <Nav.Item className="mx-1">
+                <Button variant="light" onClick={() => logout()}>
+                  <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                </Button>
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -60,10 +81,10 @@ const NavSidebar = () => {
       <main id="main-content">
         <aside id="main-sidebar">
           <SideBarButtons />
-          <Row className={"gap-1"}>
-            <Col>
-              <Button onClick={handleToggle}>Side</Button>
-            </Col>
+          <Row className={"gap-1 m-0 px-2 d-grid"} id="open-sidebar">
+            <Button size="sm" onClick={handleToggle} variant="outline-success">
+              <FontAwesomeIcon icon={faSquareCaretRight} size="1x" />
+            </Button>
           </Row>
         </aside>
         <Offcanvas show={show} onHide={handleToggle}>

@@ -1,10 +1,63 @@
 // import React from "react";
-
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./home.css";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import React from "react";
 import useRefreshToken from "../../hooks/useRefreshToken";
+import FormGroup from "../../components/forms/FormSearchAdd";
+import Table from "react-bootstrap/esm/Table";
+import PaginationComlplex from "../../components/forms/Pagination";
 
+function LinedTable() {
+  return (
+    <div className="table-sessios">
+      <Table hover responsive id="table-session-container">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td colSpan={2}>Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </Table>
+      <div className="table-session-pagination">
+        <PaginationComlplex />
+      </div>
+    </div>
+  );
+}
 function Home() {
   const [_, setResult] = React.useState<any>();
   const axiosPrivate = useAxiosPrivate();
@@ -47,10 +100,9 @@ function Home() {
 
   return (
     <>
-      <section>
-        <h1>Home page</h1>
-        {/* <Link to={"/Users"}>see users</Link> */}
-        <button onClick={() => refresh()}>refresh</button>
+      <section id="home_container">
+        <FormGroup />
+        <LinedTable />
       </section>
     </>
   );

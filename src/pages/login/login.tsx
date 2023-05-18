@@ -10,7 +10,7 @@ function Login() {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/home";
+  const from = location.state?.from?.pathname || "/filmes";
 
   const emailRef = React.useRef<HTMLInputElement>(null);
   const errRef = React.useRef<HTMLParagraphElement>(null);

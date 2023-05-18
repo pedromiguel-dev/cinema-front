@@ -9,7 +9,7 @@ function PersistLogin() {
   const refresh = useRefreshToken();
   const { auth } = useAuth();
 
-  React.useEffect(() => {
+  React.useEffect( () => {
     const verifyRefreshToken = async () => {
       try {
         await refresh();

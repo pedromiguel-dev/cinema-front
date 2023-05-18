@@ -1,19 +1,21 @@
 import axios from "../api/axios";
 import useAuth from "./useAuth";
+// import React from "react";
 
 function useLogout() {
   const { setAuth } = useAuth();
 
   const logout = async () => {
-    setAuth?.({ user: undefined });
+      setAuth?.({ user: undefined });
 
-    try {
-      const response = await axios.get("api/v1/logout", {
-        withCredentials: true,
-      });
-    } catch (error) {
-      console.error(error);
-    }
+      try {
+        await axios.get("api/v1/logout", {
+          withCredentials: true,
+        });
+        return
+      } catch (error) {
+        console.error(error);
+      }
   };
 
   return logout;

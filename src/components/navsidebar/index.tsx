@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import "./index.css";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Nav, NavDropdown, Offcanvas, Button, Row, Col } from "react-bootstrap";
+import { Container, Nav, Offcanvas, Button, Row, Col } from "react-bootstrap";
 import useLogout from "../../hooks/useLogout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,21 +17,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const SideBarButtons = () => {
+  const navigate = useNavigate();
   return (
     <Container fluid id="menu-container">
-      <Row className={"gap-4 sidebar-linha active"}>
+      <Row className={"gap-4 sidebar-linha active"} onClick={() => navigate('/filmes')}>
         <Col>
           <FontAwesomeIcon icon={faFilm} />
         </Col>
         <h5 className="p-0 m-0">Filmes</h5>
       </Row>
-      <Row className={"gap-4 sidebar-linha"}>
+      <Row className={"gap-4 sidebar-linha"} onClick={() => navigate('/secoes')}>
         <Col>
           <FontAwesomeIcon icon={faVideo} />
         </Col>
         <h5 className="p-0 m-0">Seções</h5>
       </Row>
-      <Row className={"gap-4 sidebar-linha"}>
+      <Row className={"gap-4 sidebar-linha"} onClick={() => navigate('/salas')}>
         <Col>
           <FontAwesomeIcon icon={faDoorOpen} />
         </Col>

@@ -22,6 +22,7 @@
 
 #table-session-container tr:nth-child(even) {
     background-color: #84E3DD;
+    color: #484848;
 }
 
 #table-session-container tr:nth-child(odd) {
@@ -45,3 +46,24 @@
     color: black !important;
     font-weight: bold !important;
 }
+
+
+@media (max-width: 700px){
+  #table-session-container td 
+  {
+    display: grid; 
+    grid-template-columns: 15ch auto
+  }
+  #table-session-container th {
+    display: none
+  }
+  td::before {
+    content: attr(data-cell) ": ";
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+} 
+
+
+

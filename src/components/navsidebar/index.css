@@ -58,7 +58,7 @@
     align-items: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 890px) {
     #main-sidebar {
         width: 5rem;
     }

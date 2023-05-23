@@ -3,6 +3,7 @@ import PaginationComlplex from "../../components/forms/Pagination.tsx";
 import FormGroup from "../../components/forms/FormSearchAdd.tsx";
 import React from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.ts";
+import EditSessions from "./modal/index.tsx";
 
 
 function formatDate(dateString: string | undefined) {
@@ -43,6 +44,10 @@ interface props {
 function LinedTable(props: props) {
   return (
     <div className="table-sessios">
+      <div className="table-session-pagination">
+        <h6>Seções cadastradas</h6>
+        <PaginationComlplex setPage={props.setPage} totalPages={props.maxPages ? props.maxPages : 1} page={props.page} />
+      </div>
       <Table hover responsive id="table-session-container" role="talbe">
         <thead role="rowheader">
           <tr role="row">
@@ -88,8 +93,8 @@ function Sessions() {
   const [page, setPage] = React.useState(1)
   const [maxPages, setMaxPages] = React.useState(1)
   const [sessions, setSessions] = React.useState<Partial<sessionsProps>[]>()
+  const [modalShow, setModalShow] = React.useState(true);
 
-  //fetch sessions with axios
   React.useEffect(() => {
     let isMounted = true;
     const controller = new AbortController()
@@ -119,6 +124,8 @@ function Sessions() {
   return (
     <section id="home_container">
       <FormGroup title={"Seção"} add={"seções"} setFilter={setFilter} />
+      <EditSessions show={modalShow}
+        onHide={() => setModalShow(false)} />
       {sessions && <LinedTable data={sessions} setPage={setPage} page={page} maxPages={maxPages} />}
     </section>
   )

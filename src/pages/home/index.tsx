@@ -47,7 +47,7 @@ function Home() {
   return (
     <>
       <section id="home_container">
-        <FormGroup title={"Home"}/>
+        <FormGroup title={"Home"} />
         {/*<LinedTable />*/}
       </section>
     </>

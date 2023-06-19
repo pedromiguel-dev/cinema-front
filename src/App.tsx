@@ -1,7 +1,7 @@
 import Layout from "./layout";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
-import Login from "./pages/login/Login";
+import Login from "./pages/login/login";
 import RequireAuth from "./pages/RequireAuth";
 import Register from "./pages/register";
 import Users from "./pages/users";
